@@ -1,0 +1,2 @@
+
+void PrintMag(StrMundo * Mundo );
