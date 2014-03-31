@@ -1,5 +1,5 @@
 Bayesian Society
 ===============
 
-This program simulate a society of iteractin Bayesian agents.
+This program simulate a society of interacting Bayesian agents.
 
