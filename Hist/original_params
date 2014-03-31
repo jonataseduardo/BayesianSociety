@@ -1,0 +1,43 @@
+    viz        = "20"
+    num        = "400"
+    graph      = "2"
+    tstep      = "1.0"
+    coleta     = "10000"
+    burn       = "6000"
+    tth        = "0.65"
+    nmasters   = "4"
+    nsamples   = "400"
+    
+    #rho = arange(0.01,0.99,0.1)
+    #rho = append(rho,0.99) 
+    #rho = arange(0.0,1.0,0.02)
+    rho = arange(0.01,1.0,0.01)
+    rho = append(rho,arange(0.805,.99,0.01)) 
+    
+    #Lamb = append( arange(0.2,1.0,0.02), arange(1.0,3.0,0.1) )
+    Lamb = sqrt(1 - rho**2)/rho
+    #lbeta = append(arange(-9.0,-4.3,0.2),arange(-4.3,2.0,0.1))
+    #lbeta = append(lbeta,arange(2.0,4.0,0.3))
+    lbeta = arange(-8.0,4.0,0.1)
+    viz = [20]
+         
+    print "************ PARTE 1 ***************"
+
+    params = [ '%f'%l   + " " +
+               '%f'%b   + " " +
+               "%d"%v   + " " +
+               num      + " " +
+               graph    + " " +
+               tstep    + " " +
+               coleta   + " " +
+               burn     + " " +
+               tth      + " " +
+               nmasters + " " +
+               nsamples   
+               for v in viz
+               for l in Lamb
+               for b in reversed(lbeta) ]
+    for p in params:
+        print p
+
+
