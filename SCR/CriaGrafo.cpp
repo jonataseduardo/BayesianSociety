@@ -7,9 +7,11 @@ void CriaGrafo ( struct StrMundo * Mundo, char gname[20], int ops ){
 
     igraph_integer_t NUM = Mundo->NUM;
     int nviz = Mundo->NVIZ;
+    double p;
 
     if( ops == 4 ){
-        igraph_erdos_renyi_game( Mundo->graph, IGRAPH_ERDOS_RENYI_GNP, NUM, (double)nviz/(double)NUM ,  IGRAPH_UNDIRECTED, IGRAPH_NO_LOOPS);
+        p = Mundo->p > 1.0? (double)nviz/(double)NUM: Mundo->p;
+        igraph_erdos_renyi_game( Mundo->graph, IGRAPH_ERDOS_RENYI_GNP, NUM, p,  IGRAPH_UNDIRECTED, IGRAPH_NO_LOOPS);
         sprintf(gname, "%s", "Arvore");
     }
 
@@ -24,8 +26,9 @@ void CriaGrafo ( struct StrMundo * Mundo, char gname[20], int ops ){
     }
 
     if( ops == 1 ){
-        igraph_watts_strogatz_game( Mundo->graph, 2,(size_t)sqrt((double)NUM), 1, 0.1);
-        sprintf( gname, "%s","SmallWorld" );
+        p = Mundo->p > 1.0? 0.1: Mundo->p;
+        igraph_watts_strogatz_game( Mundo->graph, 2,(size_t)sqrt((double)NUM), 1, p);
+        sprintf( gname, "%s","WattsStrogatz");
     }
 
     if( ops == 0 ){

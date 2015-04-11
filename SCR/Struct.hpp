@@ -50,5 +50,6 @@ struct StrMundo {
     size_t NUM;
     size_t DIM;
     int NVIZ;
+    double p;
     char name[200];
 };
