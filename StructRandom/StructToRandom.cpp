@@ -7,7 +7,7 @@
 #include "../SCR/StartGslRngSeed.hpp"
 #include "../SCR/StartStrOnline.hpp"
 #include "../SCR/DestroyStrOnline.hpp"
-#include "../SCR/GenesisMaster.hpp"
+#include "../SCR/GenesisSR.hpp"
 #include "../SCR/EscolheDupla.hpp"
 #include "../SCR/MetropolizOnline.hpp"
 #include "../SCR/Armagedon.hpp"
@@ -54,7 +54,7 @@ int main(int argc, char **argv)
     do{
         struct StrMundo * Mundo   = NULL;
 
-        GenesisMaster(argc, argv, r, &Mundo );
+        GenesisSR(argc, argv, r, &Mundo );
 
         int NUM = Mundo->NUM;
         int burn = NUM*Mundo->MCTime->burn;
@@ -74,10 +74,10 @@ int main(int argc, char **argv)
         }
 
         //PrintAutoCorr( Mundo, -th, NUM*Mundo->MCTime->coleta/5, n );
-        //EvalTempAutoCorrErg( Mundo, th,  NUM*Mundo->MCTime->coleta/20,
-                //&et[n], &eet[n], &mt[n], &emt[n]);
-        EvalTempAutoCorrMag( Mundo, th,  NUM*Mundo->MCTime->coleta/20,
-                &mt[n], &emt[n]);
+        // EvalTempAutoCorrErg(Mundo, th,  NUM*Mundo->MCTime->coleta/20,
+        //                     &et[n], &eet[n], &mt[n], &emt[n]);
+        EvalTempAutoCorrMag(Mundo, th,  NUM*Mundo->MCTime->coleta/20,
+                            &mt[n], &emt[n]);
         if (n==0) {
             sprintf(name,"%s",Mundo->name);
         }
@@ -88,9 +88,9 @@ int main(int argc, char **argv)
         }else{
             GetSamplesEvolut( Mundo, 2000.0, sample);
         }
-
+        // printf("%d %d \n",n, ns);
         Armagedon( &Mundo );
-        n++;
+    n++; 
     }while(n < NMaster || ns < NSamples);
     
     NormalizaGSLHistograma( h );
@@ -111,7 +111,7 @@ int main(int argc, char **argv)
     double acpt  = gsl_stats_mean(sample->acept,1,sample->tempo);
     double vacpt = gsl_stats_variance(sample->acept,1,sample->tempo);
     
-    printf("%g %g %g %g %g %g %g %g %g %g %g %d %d ", 
+    printf(" %g %g %g %g %g %g %g %g %g %g %g %d %d", 
             etau, eetau, mtau, emtau,
             mag, vmag, sigma, erg, verg,
             acpt, vacpt, n, sample->tempo);
