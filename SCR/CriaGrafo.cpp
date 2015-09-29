@@ -16,7 +16,8 @@ void CriaGrafo ( struct StrMundo * Mundo, char gname[20], int ops ){
     }
 
     if( ops == 3 ){
-        igraph_erdos_renyi_game( Mundo->graph, IGRAPH_ERDOS_RENYI_GNP, NUM, (double)nviz/(double)NUM, IGRAPH_UNDIRECTED, IGRAPH_LOOPS);
+        p = Mundo->p > 1.0? (double)nviz/(double)NUM: Mundo->p;
+        igraph_erdos_renyi_game( Mundo->graph, IGRAPH_ERDOS_RENYI_GNP, NUM, p, IGRAPH_UNDIRECTED, IGRAPH_LOOPS);
         sprintf( gname, "%s","Erdos");
     }
 
