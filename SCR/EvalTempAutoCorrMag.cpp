@@ -38,8 +38,9 @@ void EvalTempAutoCorrMag( StrMundo * Mundo , double th, int SIZE,
     }while( (j < SIZE) && ((xe >= th) && (xm >= th)) ); 
 
     gsl_fit_linear(Temp, 1, Xmag, 1, j, &ma, &mtau, &mcaa, &mcat, &mctt, &mchisq);
-    
-    *tm = -1.0/mtau;
+   
+    //correcting for really small correlation time 
+    *tm = (mtau < 0)? -1.0/mtau: 0;
 
     free(Temp);          
     free(Xmag);          
